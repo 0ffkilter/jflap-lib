@@ -76,6 +76,8 @@ public class CommandLine {
             if (params.size() != 2) throw new RuntimeException("Incorrect arguments. Please provide <file> <input>");
             File file = checked(new File(params.get(0)));
             String input = params.get(1);
+            if (input.equals("EMPTY"))
+              input = "";
             FiniteStateAutomaton automaton = IO.loadAutomaton(file);
             // Load a simulator to test the automaton
             AutomatonSimulator sim = SimulatorFactory.getSimulator(automaton);
