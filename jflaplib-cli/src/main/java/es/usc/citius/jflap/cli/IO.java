@@ -42,7 +42,7 @@ public final class IO {
         // Check if the location is a file
         File f = new File(location);
         if (f.isFile()){
-            return loadAutomaton(f);
+            return loadTuring(f);
         }
         // Check if it is a valid URL
         try {
