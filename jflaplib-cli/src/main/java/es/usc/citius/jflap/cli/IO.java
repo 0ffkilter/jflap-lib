@@ -2,7 +2,7 @@ package es.usc.citius.jflap.cli;
 
 
 import edu.duke.cs.jflap.automata.fsa.FiniteStateAutomaton;
-import edu.duke.cs.jflap.turing.TuringMachine;
+import edu.duke.cs.jflap.automata.turing.TuringMachine;
 import edu.duke.cs.jflap.file.XMLCodec;
 
 import java.io.File;
