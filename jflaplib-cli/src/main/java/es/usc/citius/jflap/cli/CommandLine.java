@@ -8,6 +8,7 @@ import edu.duke.cs.jflap.automata.AutomatonSimulator;
 import edu.duke.cs.jflap.automata.SimulatorFactory;
 import edu.duke.cs.jflap.automata.fsa.FSAToRegularExpressionConverter;
 import edu.duke.cs.jflap.automata.fsa.FiniteStateAutomaton;
+import edu.duke.cs.jflap.automata.turing.TuringMachine;
 import edu.duke.cs.jflap.automata.graph.FSAEqualityChecker;
 import edu.duke.cs.jflap.file.xml.AutomatonTransducer;
 
@@ -76,15 +77,26 @@ public class CommandLine {
             if (params.size() != 2) throw new RuntimeException("Incorrect arguments. Please provide <file> <input>");
             File file = checked(new File(params.get(0)));
             String input = params.get(1);
-            if (input.equals("EMPTY"))
+            if (input.equals("EMPTY") || input.equals("{empty}"))
               input = "";
-            FiniteStateAutomaton automaton = IO.loadAutomaton(file);
-            // Load a simulator to test the automaton
-            AutomatonSimulator sim = SimulatorFactory.getSimulator(automaton);
-            if (sim == null) throw new RuntimeException("Cannot load an automaton simulator for " + automaton.getClass());
-            // Test the automaton with an input
-            boolean accept = sim.simulateInput(input);
-            System.out.println(accept);
+            try {
+                FiniteStateAutomaton automaton = IO.loadAutomaton(file);
+                // Load a simulator to test the automaton
+                AutomatonSimulator sim = SimulatorFactory.getSimulator(automaton);
+                if (sim == null) throw new RuntimeException("Cannot load an automaton simulator for " + automaton.getClass());
+                // Test the automaton with an input
+                boolean accept = sim.simulateInput(input);
+                System.out.println(accept);
+            } catch (Exception e) {
+                TuringMachine automaton = IO.loadAutomaton(file);
+                // Load a simulator to test the automaton
+                AutomatonSimulator sim = SimulatorFactory.getSimulator(automaton);
+                if (sim == null) throw new RuntimeException("Cannot load an automaton simulator for " + automaton.getClass());
+                // Test the automaton with an input
+                boolean accept = sim.simulateInput(input);
+                System.out.println(accept);
+
+            }
         }
     }
 
