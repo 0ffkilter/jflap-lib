@@ -8,6 +8,7 @@ import edu.duke.cs.jflap.automata.AutomatonSimulator;
 import edu.duke.cs.jflap.automata.SimulatorFactory;
 import edu.duke.cs.jflap.automata.fsa.FSAToRegularExpressionConverter;
 import edu.duke.cs.jflap.automata.fsa.FiniteStateAutomaton;
+import edu.duke.cs.jflap.automata.fsa.TMSimulator;
 import edu.duke.cs.jflap.automata.turing.TuringMachine;
 import edu.duke.cs.jflap.automata.graph.FSAEqualityChecker;
 import edu.duke.cs.jflap.file.xml.AutomatonTransducer;
@@ -90,7 +91,7 @@ public class CommandLine {
             } catch (Exception e) {
                 TuringMachine automaton = IO.loadTuring(file);
                 // Load a simulator to test the automaton
-                AutomatonSimulator sim = SimulatorFactory.getSimulator(automaton);
+                TMSimulator sim = SimulatorFactory.getSimulator(automaton);
                 if (sim == null) throw new RuntimeException("Cannot load an automaton simulator for " + automaton.getClass());
                 // Test the automaton with an input
                 boolean accept = sim.simulateInput(input);
