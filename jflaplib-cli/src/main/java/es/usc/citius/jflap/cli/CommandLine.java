@@ -88,7 +88,7 @@ public class CommandLine {
                 boolean accept = sim.simulateInput(input);
                 System.out.println(accept);
             } catch (Exception e) {
-                TuringMachine automaton = IO.loadAutomaton(file);
+                TuringMachine automaton = IO.loadTuring(file);
                 // Load a simulator to test the automaton
                 AutomatonSimulator sim = SimulatorFactory.getSimulator(automaton);
                 if (sim == null) throw new RuntimeException("Cannot load an automaton simulator for " + automaton.getClass());
